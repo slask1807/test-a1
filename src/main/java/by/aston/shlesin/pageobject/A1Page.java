@@ -1,37 +1,45 @@
 package by.aston.shlesin.pageobject;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import by.aston.shlesin.webdriver.SingleWebdriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class A1Page {
-    private String buttonAcceptСookie = "//button[@data-action-button='acceptAll']";
-    private String inputEmailForSubscribe = "//input[@class='form-input']";
-    private String messegesSubscribe = "//p[@class='iziToast-message slideIn']/div/div";
     private WebDriver driver;
 
     public A1Page() {
         this.driver = SingleWebdriver.getDriver();
     }
 
+    @FindBy(xpath = "//button[@class='button button--primary button--fixed-width' and @data-action-button='acceptAll']")
+    private WebElement buttonAcceptСookie;
+
+    @FindBy(xpath = "//input[@class='form-input']")
+    private WebElement inputEmailForSubscribe;
+
+    @FindBy(css = "body")
+    private WebElement bodyForMovingDown;
+
+    @FindBy(xpath = "//p[@class='iziToast-message slideIn']/div/div")
+    private List<WebElement> messegesSubscribe;
+
     public void clickButtonAcceptСookie() {
-        driver.findElement(By.xpath(buttonAcceptСookie)).click();
+        buttonAcceptСookie.click();
     }
 
-       public void sendKeys(String email) throws InterruptedException {
-        driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL, Keys.END);
-        Thread.sleep(3000);
-        driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL, Keys.END);
-        driver.findElement(By.xpath(inputEmailForSubscribe)).sendKeys(email + Keys.ENTER);
+    public void sendKeys(String email) throws InterruptedException {
+        bodyForMovingDown.sendKeys(Keys.CONTROL, Keys.END);
+        bodyForMovingDown.sendKeys(Keys.CONTROL, Keys.END);
+        inputEmailForSubscribe.sendKeys(email + Keys.ENTER);
     }
 
     public List<WebElement> setItemCatalog() {
-        return driver.findElements(By.xpath(messegesSubscribe));
+        return messegesSubscribe;
     }
 
     public List<String> addMessagesToCatalog() {
@@ -49,5 +57,4 @@ public class A1Page {
         expectedKatalogItems.add("Вы успешно подписались на нашу новостную рассылку.");
         return expectedKatalogItems;
     }
-
 }
