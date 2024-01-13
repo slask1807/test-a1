@@ -11,8 +11,8 @@ public class SingleWebdriver {
     public static WebDriver getDriver() {
         if (driver == null) {
             driver = new ChromeDriver();
-            SingleWebdriver.getDriver().navigate().to("https://www.a1.by/");
             driver.manage().window().maximize();
+            SingleWebdriver.getDriver().navigate().to("https://www.a1.by/");
             SingleWebdriver.getDriver().manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
         }
         return driver;

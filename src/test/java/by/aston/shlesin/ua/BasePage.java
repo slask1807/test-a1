@@ -1,4 +1,4 @@
-package by.aston.shlesin;
+package by.aston.shlesin.ua;
 
 import by.aston.shlesin.pageobject.A1Page;
 import by.aston.shlesin.webdriver.SingleWebdriver;
