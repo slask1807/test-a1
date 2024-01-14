@@ -1,5 +1,6 @@
 package by.aston.shlesin.pageobject;
 
+import org.bouncycastle.oer.its.ieee1609dot2.basetypes.Duration;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -9,7 +10,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,9 +32,9 @@ public class A1Page {
     @FindBy(xpath = "//p[@class='iziToast-message slideIn']/div/div")
     private List<WebElement> messegesSubscribe;
 
-    public WebElement waitForWebElementVisibilityInSeconds(WebElement element, int secondsToWait) {
-        return new WebDriverWait(driver, Duration.ofSeconds(secondsToWait))
-                .until(ExpectedConditions.visibilityOf(element));
+    protected WebElement waitForWebElementVisibilityInSeconds(WebElement element, int seconds) {
+        return new WebDriverWait(driver, java.time.Duration.ofSeconds(seconds))
+                .until(ExpectedConditions.elementToBeClickable(element));
     }
 
     public void clickButtonAcceptСookie() {
@@ -58,6 +58,7 @@ public class A1Page {
         for (WebElement itemlist : itemList) {
             catalogItemList.add(itemlist.getText());
         }
+
         return catalogItemList;
     }
 

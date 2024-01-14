@@ -12,9 +12,16 @@ public class SingleWebdriver {
         if (driver == null) {
             driver = new ChromeDriver();
             driver.manage().window().maximize();
-            SingleWebdriver.getDriver().navigate().to("https://www.a1.by/");
-            SingleWebdriver.getDriver().manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
+            driver.navigate().to("https://www.a1.by/");
+            driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
         }
         return driver;
+    }
+
+    public static void quitDriver() {
+        if (driver != null) {
+            driver.quit();
+            driver = null;
+        }
     }
 }
